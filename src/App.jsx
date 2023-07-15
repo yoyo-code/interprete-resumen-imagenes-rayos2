@@ -22,6 +22,24 @@ const App = () => {
   const [seleccionArchivo, setSeleccionArchivo] = useState('');
   const [seleccionExamen, setSeleccionExamen] = useState('');
 
+  const eliminarDatosSensibles = (textoArray) => {
+    let palabras = ["nombre", "paciente", "rut"];
+    let reemplazo = "";
+
+    return textoArray.map(obj => {
+      let texto = obj.text.replace(/\s+/g, ' ');
+      palabras.forEach(palabra => {
+        let regex = new RegExp(`(?<=${palabra}[:]?)(\\s+\\S+){1,4}`, "gi");
+        texto = texto.replace(regex, reemplazo);
+      });
+
+      return {
+        ...obj,
+        text: texto
+      };
+    });
+  };
+  
   const handlePdfUpload = (event) => {
     const file = event.target.files[0];
     setPdfFile(file);
@@ -47,8 +65,8 @@ const App = () => {
           }
           pageData.push({ text: text, pageNum: i + 1 });
         }
-        // Actualizar el estado con el array de datos de página
-        setTexto(pageData);
+        // Actualizar el estado con el array de datos de página sin datos sensibles
+        setTexto(eliminarDatosSensibles(pageData));
       });
     });
   };
@@ -77,7 +95,11 @@ const App = () => {
       });
 
       Promise.all(promises)
-        .then(() => setCargandoImagen(null))
+        .then(() => {
+          setCargandoImagen(null);
+          // Actualizar el estado con el array de datos de página sin datos sensibles
+          setTexto(prevState => eliminarDatosSensibles(prevState));
+        })
         .catch(() => setCargandoImagen('Ha ocurrido un error al procesar las imágenes.'));
     }
   };

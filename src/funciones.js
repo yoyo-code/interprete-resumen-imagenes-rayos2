@@ -9,7 +9,7 @@ import { ChatOpenAI } from "langchain/chat_models/openai";
 
 export const extraerExamenes = async (texto) => {
   const model = new OpenAI({
-    openAIApiKey: "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",
+    openAIApiKey: "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",
     organization: "org-bqBKXJsYa0WWF6UFEVZghnKJ",
     modelName: "gpt-4",
     temperature: 0,
@@ -31,7 +31,7 @@ export const procesarElementosParalelo = (array) => {
 
 export const crearAnalisis = async (texto) => {
   const chat = new ChatOpenAI({
-    openAIApiKey: "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",
+    openAIApiKey: "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",
     organization: "org-bqBKXJsYa0WWF6UFEVZghnKJ",
     modelName: "gpt-4",
     temperature: 1,
@@ -59,7 +59,7 @@ export const procesarAnalisisParalelo = (array) => {
 
 export const resumirAnalisis = async (texto) => {
   const model = new OpenAI({
-    openAIApiKey: "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",
+    openAIApiKey: "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",
     organization: "org-bqBKXJsYa0WWF6UFEVZghnKJ",
     modelName: "gpt-4",
     temperature: 0,
@@ -77,7 +77,7 @@ export const resumirAnalisis = async (texto) => {
 
 export const analisisImagen = async (texto) => {
   const chat = new ChatOpenAI({
-    openAIApiKey: "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",
+    openAIApiKey: "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",
     organization: "org-bqBKXJsYa0WWF6UFEVZghnKJ",
     modelName: "gpt-4",
     temperature: 1,
